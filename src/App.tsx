@@ -15,7 +15,10 @@ class App extends React.Component {
         axios.get<string>('https://schlemmerblock.de/Gutscheinbuch/Karlsruhe-Umgebung-2019')
             .then(value => {
                     const restaurantsWithoutAdresse = this.parseRestaurants(value);
-                    this.setState({restaurants: this.addAdresse(restaurantsWithoutAdresse)});
+                    const restaurantsWithAdressen = this.buildRestaurantsWithAdressen(restaurantsWithoutAdresse);
+                    Promise.all(restaurantsWithAdressen)
+                        .then(res => this.setState({restaurants: res}));
+                    // this.setState({restaurants: restaurantsWithAdressen});
                     console.log(this.state.restaurants);
                 }
             );
@@ -50,14 +53,14 @@ class App extends React.Component {
         return result;
     }
 
-    public addAdresse(restaurants: Restaurant[]) {
-        return restaurants.map(restaurant => {
+    public buildRestaurantsWithAdressen(restaurants: Restaurant[]): Array<Promise<{ name: string; adresse: string; link: string; location: string; key: string }>>{
+        return restaurants.map(async restaurant => {
             const result = {...restaurant};
-            axios.get<string>(restaurant.link).then(value => {
-                    result.adresse = this.parseAdresse(value);
-                    console.log(result.adresse);
-                }
-            );
+            await axios.get<string>(restaurant.link)
+                .then(value => {
+                        result.adresse = this.parseAdresse(value);
+                    }
+                );
             return result;
         })
 
