@@ -13,11 +13,11 @@
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
     "noImplicitThis": true,
-    "noImplicitAny": true,
-    "importHelpers": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+//    "noImplicitAny": true,
+    "importHelpers": true
+//    "strictNullChecks": true,
+//    "suppressImplicitAnyIndexErrors": true,
+//    "noUnusedLocals": true
   },
   "exclude": [
     "node_modules",

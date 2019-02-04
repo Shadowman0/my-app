@@ -1,5 +1,9 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
@@ -8,12 +12,19 @@
     ]
   },
   "rules": {
+    "object-literal-sort-keys": false,
     "no-console": false,
+    "no-debugger": false,
     "options": {
       "emitError": false,
       "emitWarning": true
     }
   },
-  "jsRules": { "no-console": false },
-  "defaultSeverity": "warning"
+  "only-arrow-functions": true,
+  "jsRules": {
+    "no-console": false
+  },
+  "defaultSeverity": "warning",
+  "curly": true,
+  "no-unused-expression": false
 }
